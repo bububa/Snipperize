@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Django1.0" />
+	<meta name="verify-v1" content="cz9DizbIXJeR4jj3sOsH4Vl5JxCrWrA5W9h9SRRNjZw=" >
+	{% comment %}<link type="text/css" rel="stylesheet" media="screen, projection" href="/w/skins/alexg/main.css?164"/>
+	<link rel="search" type="application/opensearchdescription+xml" href="/opensearch/" title="Snipperize Open Search" />{% endcomment %}
+	<link rel="alternate" type="application/rss+xml" title="Snipperize RSS Feed" href="/feeds/latest/" />
+    {% block meta %}{% endblock %}
+    <title>{% block title %}Snipperize{% endblock %}</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link type="text/css" href="/media/css/base.css?v=200905241801" rel="stylesheet" media="screen">
+    {% block css %}{% endblock %}
+</head>
+<body>
+	<form name="searchForm" id="searchForm" action="{% url snippet_search %}" method="get">
+        <select name="search_language">
+			<option value="">All languages</option>
+		{% for alias, lang in request.SUPPORT_LANGUAGES.items %}
+			<option value="{{ alias }}">{{ lang }}</option>
+		{% endfor %}
+		</select>
+		<input type="text" name="keyword"/>
+        <input type="submit" name="search_submit_btn" value="Search"/>
+    </form>
+</body>
+</html>

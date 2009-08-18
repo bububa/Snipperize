@@ -1,0 +1,37 @@
+8
+
+dir
+0
+https://snipperize.googlecode.com/svn/trunk/snipperize/templates/feeds
+https://snipperize.googlecode.com/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+latest_title.html
+file
+
+
+
+add
+
+latest_description.html
+file
+
+
+
+add
+
+latest_feed_proxy.html
+file
+
+
+
+add
+

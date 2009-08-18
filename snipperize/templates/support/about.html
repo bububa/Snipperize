@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load timezone %}
+{% block title %}About Prof.Syd.Xu(a.k.a. bububa) - Snipperize{% endblock %}
+{% block meta %}
+<meta name="keywords" content="{% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }} snippets{% if not forloop.last %}, {% endif %}{% endfor %}, {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+<meta name="description" content="Prof.Syd.Xu is the author of Snipperize, as known as bububa. Snipperize is a code clips warehouse, support {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+<meta name="author" content="Prof.Syd.Xu" />
+{% endblock %}
+{% block title_subs %}
+<span class="divider">/</span>Prof.Syd.Xu
+{% endblock %}
+{% block site_sub %}
+About Prof.Syd.Xu (a.k.a. bububa)
+{% endblock %}
+{% block body_content %}
+<h2>Prof.Syd.Xu</h2>
+<p>Snipperize Author<br/>Email: <a href="mailto:prof.syd.xu@gmail.com" title="prof.syd.xu's email" class="external">prof.syd.xu[at]gmail.com</a><br/>Blog: <a href="http://syd.todayclose.com/" title="小心超人" class="external">小心超人!</a></p>
+<h2>About</h2>
+<p>Beijing based developer with 10 years of experience developing rich internet applications using Flash, Flex, CSS, JavaScript, PHP, Ruby, Python and other platforms. Working for <a href="http://jipingmi.com/" title="北京租房网" class="external">jipingmi.com</a> the largest real estate vertical search engine in China as web&system developer, focused on web crawler, intelligence collection techniques.</p>
+<p>If you would like to reach me, please write to <a href="mailto:prof.syd.xu@gmail.com" title="prof.syd.xu's email" class="external">prof.syd.xu[at]gmail.com</a>. Thank you.</p>
+{% endblock %}

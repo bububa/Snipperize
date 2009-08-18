@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load timezone %}
+{% block title %}Your API KEY - Snipperize{% endblock %}
+{% block meta %}
+<meta name="keywords" content="{% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }} snippets{% if not forloop.last %}, {% endif %}{% endfor %}, {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+<meta name="description" content="Snipperize API KEY for you. Snipperize is a code clips warehouse, support {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+<meta name="author" content="Prof.Syd.Xu" />
+{% endblock %}
+{% block title_subs %}
+<span class="divider">/</span>API KEY
+{% endblock %}
+{% block site_sub %}
+API KEY
+{% endblock %}
+{% block body_content %}
+<h2>API KEY</h2>
+<p>Your API KEY is <span style="background:yellow">{{ API_KEY }}</span></p>
+<p>If you use snipperize desktop software, you probably need this API KEY to sync your snippets between local and snipperize.todayclose.com.</p>
+{% endblock %}

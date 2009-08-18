@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block js %}
+{% endblock %}
+{% block title %}New Snippet - Snipperize{% endblock %}
+{% block meta %}
+<meta name="author" content="Prof.Syd.Xu" />
+<meta name="robots" content="noindex" />
+{% endblock %}
+{% block promo %}
+<div class="promo green">Snipperize is a code clips warehouse, support nearly all the computer languages.</div>
+{% endblock %}
+{% block body_content %}
+<h2><span class="mw-headline">Submit New Snippet</span></h2>
+<p>You could find all your submitted snippets in "My Snippets" page, and modified it at any time.</p>
+<form class="box-bottom" id="snippetAddForm" name="snippetAddForm" method="post" action="/snippet/add/">
+    <p class="textfield"><label for="title">Title</label>{{ form.title }}{% if form.title.errors %}<ul class="warn">{% for e in form.title.errors %}<li>{{e}}</li>{% endfor %}</ul>{% endif %}</p>
+    <p class="selectbox"><label for="language">Language</label>{{ form.language }}{% if form.language.errors %}<ul class="warn">{% for e in form.language.errors %}<li>{{e}}</li>{% endfor %}</ul>{% endif %}</p>
+    <p class="textfield"><label for="url">URL</label>{{ form.url }}{% if form.url.errors %}<ul class="warn">{% for e in form.url.errors %}<li>{{e}}</li>{% endfor %}</ul>{% endif %}</p>
+    <p class="textarea"><label for="code">Code</label>{{ form.code }}{% if form.code.errors %}<ul class="warn">{% for e in form.code.errors %}<li>{{e}}</li>{% endfor %}</ul>{% endif %}</p>
+    <p class="textarea"><label for="comment">Comment</label>{{ form.comment }}{% if form.comment.errors %}<ul class="warn">{% for e in form.comment.errors %}<li>{{e}}</li>{% endfor %}</ul>{% endif %}</p>
+    <p class="textfield"><label for="tag">Tags</label>{{ form.tag }}{% if form.tag.errors %}<ul class="warn">{% for e in form.tag.errors %}<li>{{e}}</li>{% endfor %}</ul>{% endif %}</p>
+    <p>{{ form.private }}<label for="private">Private</label>{% if form.private.errors %}<ul class="warn">{% for e in form.private.errors %}<li>{{e}}</li>{% endfor %}</ul>{% endif %}</p>
+    {% if system_error %}<p><ul class="warn"><li>系统错误, 请稍后再试.</li></ul></p>{% endif %}
+    <p><input type="submit" class="submit" value="SUBMIT"/></p>
+</form>
+<!-- Google Code for 发布代码 Conversion Page -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1067344760;
+var google_conversion_language = "en_US";
+var google_conversion_format = "1";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "54wECO7wlwEQ-Mb5_AM";
+if (0.2) {
+  var google_conversion_value = 0.2;
+}
+//-->
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1067344760/?value=0.2&amp;label=54wECO7wlwEQ-Mb5_AM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+{% endblock %}

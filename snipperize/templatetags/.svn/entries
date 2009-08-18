@@ -1,0 +1,100 @@
+8
+
+dir
+0
+https://snipperize.googlecode.com/svn/trunk/snipperize/templatetags
+https://snipperize.googlecode.com/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+timezone.py
+file
+
+
+
+add
+
+textformat.py
+file
+
+
+
+add
+
+timezone.pyc
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+__init__.py
+file
+
+
+
+add
+
+textformat.pyc
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+__init__.pyc
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+paginator.py
+file
+
+
+
+add
+
+paginator.pyc
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+

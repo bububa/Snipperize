@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load paginator %}
+{% load timezone %}
+{% block title %}{% ifequal CURRENT_PAGE 'language_list' %}Support languages{% else %}Sitemap{% endifequal %} - Snipperize{% endblock %}
+{% block meta %}
+<meta name="keywords" content="{% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }} tags{% if not forloop.last %}, {% endif %}{% endfor %}, {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+<meta name="description" content="{% ifequal CURRENT_PAGE 'language_list' %} These are the languages supported by Snipperize.com.{% else %}This is the Snipperize.com sitemap.{% endifequal %} Snipperize is a code clips warehouse, support {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+<meta name="author" content="Prof.Syd.Xu" />
+<meta name="robots" content="All" />
+{% endblock %}
+{% block title_subs %}
+<span class="divider">/</span>{% ifequal CURRENT_PAGE 'language_list' %}Languages{% else %}Sitemap{% endifequal %}
+{% endblock %}
+{% block site_sub %}
+{% ifequal CURRENT_PAGE 'language_list' %}Languages{% else %}Sitemap{% endifequal %}
+{% endblock %}
+{% block promo %}
+ <div class="promo orange">{% ifequal CURRENT_PAGE 'language_list' %} These are the languages supported by Snipperize.com.{% else %}This is the Snipperize.com sitemap.{% endifequal %}</div>
+{% endblock %}
+{% block body_content %}
+{% for language in SUPPORT_LANGUAGES %}
+<h2><span class="mw-headline"><a href="{% url language_snippets language.alias %}" title="{{ language.lang }} snippets">{{ language.lang }}</a></span></h2>
+{% if language.tags %}
+<p>
+{% for tag in language.tags %}
+    <code><a href="{% url language_tag_snippets language.alias tag.get_escape_name tag.key.id %}" title="{{ language.lang }} {{ tag.name }} snippets">{{ tag.name }}</a></code>
+{% endfor %}
+<a href="{% url language_tags language.alias %}" title="more {{ language.lang }} snippets tags">more tags</a>
+</p>
+{% endif %}
+{% endfor %}
+{% endblock %}

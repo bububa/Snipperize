@@ -1,0 +1,12 @@
+<div class="paginator">
+    <ul>
+        {% if has_previous %}<li><a href="?{% if paginator_param %}{{paginator_param}}&{%endif%}page={{ previous }}">上一页</a></li>{% endif %}
+        {% for page_number in page_numbers %}
+        {% ifnotequal page page_number %}<li><a href="?{% if paginator_param %}{{paginator_param}}&{%endif%}page={{ page_number }}">{{page_number}}</a></li>
+        {% else %}<li><span class="thisPage">{{page_number}}</span></li>
+        {% endifnotequal %}
+        {% endfor %}
+        {% if has_next %}<li><a href="?{% if paginator_param %}{{paginator_param}}&{%endif%}page={{ next }}">下一页</a></li>{% endif %}
+    </ul>
+    <div class="clearfix"></div>
+</div>

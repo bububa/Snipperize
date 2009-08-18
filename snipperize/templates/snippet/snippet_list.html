@@ -1,0 +1,102 @@
+{% extends "snippet/snippet_list_base.html" %}
+{% load paginator %}
+{% load timezone %}
+{% block body_content %}
+{% if object_list %}
+{% if RELEVENT_TAGS %}
+<div class="side-box">
+    <div class="side-ads">
+        {%ifequal CURRENT_LANGUAGE.key 'py'%}
+        <iframe src="http://www.amazon.cn/mn/assocLinkApp?lt1=_blank&action=asso_product&prodid=bkbk635134&source=bububa&price=all&img=imgsm&border=n&bg1=ffffff&fc1=000000&lc1=003300" width="120" height="240" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+        {%else%}
+        <script type="text/javascript"><!--
+        google_ad_client = "pub-3402743572956545";
+        /* Snipperize Search 180x150 */
+        google_ad_slot = "6080302308";
+        google_ad_width = 180;
+        google_ad_height = 150;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+        {%endifequal%}
+    </div>
+    <div class="relevent_tags">
+        <h2>Relevent Tags</h2>
+        <ul>
+            <!-- google_ad_section_start -->
+            {% for tag in RELEVENT_TAGS %}
+            <li><a href="{% if CURRENT_LANGUAGE %}{% url language_tag_snippets CURRENT_LANGUAGE.key tag.get_escape_name tag.key.id %}{% else %}{% url tag_snippets tag.get_escape_name tag.key.id %}{% endif %}" title="{{ tag.name }} snippets">{{ tag.name }}</a></li>
+            {% endfor %}
+            <!-- google_ad_section_end -->
+        </ul>
+        <a href="{% if CURRENT_LANGUAGE %}{% url language_tags CURRENT_LANGUAGE.key %}{% else %}{% url tag_list %}{% endif %}" title="more tags">more tags...</a>
+    </div>
+    <img src="/media/img/snipperize_banner.gif" alt="Snipperize Banner" class="banner"/>
+    <div class="side-ads">
+        <script type="text/javascript"><!--
+        google_ad_client = "pub-3402743572956545";
+        /* Snipperize Search 120x240 */
+        google_ad_slot = "7532576085";
+        google_ad_width = 120;
+        google_ad_height = 240;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+    </div>
+</div>
+{% endif %}
+<!-- google_ad_section_start -->
+{% for snippet in object_list %}
+    {% ifequal forloop.counter 2 %}
+    <script type="text/javascript"><!--
+    google_ad_client = "pub-3402743572956545";
+    /* Snipperize Search 468&#42;60 */
+    google_ad_slot = "3813263902";
+    google_ad_width = 468;
+    google_ad_height = 60;
+    //-->
+    </script>
+    <script type="text/javascript"
+    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+    {% endifequal %}
+    {% ifequal forloop.counter 5 %}
+    <script type="text/javascript"><!--
+    google_ad_client = "pub-3402743572956545";
+    /* Snipper Search 468x15 */
+    google_ad_slot = "5669846653";
+    google_ad_width = 468;
+    google_ad_height = 15;
+    //-->
+    </script>
+    <script type="text/javascript"
+    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+    {% endifequal %}
+    {% ifequal forloop.counter 7 %}
+    <script type="text/javascript"><!--
+    google_ad_client = "pub-3402743572956545";
+    /* Snipper Search 468x15 */
+    google_ad_slot = "5669846653";
+    google_ad_width = 468;
+    google_ad_height = 15;
+    //-->
+    </script>
+    <script type="text/javascript"
+    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+    {% endifequal %}
+    <h2>{% if snippet.is_editable %}<span class="editsection">[<a href="{{ snippet.get_edit_url }}" title="edit this snippet">edit</a>]</span><span class="deletesection">[<a href="{{ snippet.get_delete_url }}" title="delete this snippet" onclick="return confirm('Are you sure you want to delete this snippet?')">delete</a>]</span>{% endif %}<span class="mw-headline"><a href="{{ snippet.get_absolute_url }}" title="{{ snippet.title }}">{{ snippet.title }}</a></span>{% if snippet.private %}<span class="private">private</span>{% endif %}</h2>
+    {% if snippet.comment %}<p class="list-comment">{{ snippet.comment }}</p>{% endif %}
+    <p><span style="background:yellow"><a href="{% url language_snippets snippet.language %}" title="{{ snippet.get_language.name }} snippets">{{ snippet.get_language.name }}</a></span>{% for tag in snippet.get_tags %}{% if forloop.first %} / {% endif %}{% if tag %}<code><a href="{% url language_tag_snippets snippet.language tag.get_escape_name tag.key.id %}" title="{{ snippet.get_language.name }} {{ tag.name }} snippets">{{ tag.name }}</a></code>{% endif %}{% if forloop.last %} / {% else %}, {% endif %}{% endfor %}by <a href="{{ snippet.author.get_absolute_url }}" title="{{ snippet.author.user.nickname }}'s snippets">{{ snippet.author.user.nickname }}</a> ({% ifnotequal snippet.elapsed.days 0 %}{{ snippet.elapsed.days }} days, {% endifnotequal %}{{ snippet.elapsed.hours|floatformat:2 }} hours ago)</p>
+{% endfor %}
+<!-- google_ad_section_end -->
+{% paginator %}
+{% else %}
+<p><span style="background:yellow">There's no search results{% if CURRENT_LANGUAGE %} for <a href="{% url language_snippets CURRENT_LANGUAGE.key %}" title="{{ CURRENT_LANGUAGE.name }} snippets">{{ CURRENT_LANGUAGE.name }}</a>{% endif %}. Do you want to <a href="{% url snippet_add %}" title="add new snippet">add your snippets</a>?</span></p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load timezone %}
+{% block title %}Recent Updates - Snipperize{% endblock %}
+{% block meta %}
+<meta name="keywords" content="{% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }} snippets{% if not forloop.last %}, {% endif %}{% endfor %}, {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+<meta name="description" content="Recent updates in Snipperize.com. Snipperize is a code clips warehouse, support {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+<meta name="author" content="Prof.Syd.Xu" />
+<meta name="robots" content="noindex" />
+{% endblock %}
+{% block title_subs %}
+<span class="divider">/</span>Recent Updates
+{% endblock %}
+{% block site_sub %}
+Snipperize.com recent updates
+{% endblock %}
+{% block body_content %}
+<h2>Recent Updates</h2>
+<p>You could follow the updates information on <a href="http://code.google.com/p/snipperize/" title="Snipperize Open Source on Google Code" rel="nofollow" target="_blank" class="external">http://code.google.com/p/snipperize/</a></p>
+{% endblock %}

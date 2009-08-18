@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load paginator %}
+{% load timezone %}
+{% block title %}{{ CURRENT_USER }}'s favorite snippets - Snipperize{% endblock %}
+{% block meta %}
+<meta name="keywords" content="{{ CURRENT_USER }}, {{ CURRENT_USER }} favorite snippets, {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }} snippets{% if not forloop.last %}, {% endif %}{% endfor %}, {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+<meta name="description" content="Here are {% if CURRENT_LANGUAGE %}{{ CURRENT_LANGUAGE.name }} {% endif %}favorite snippets collected by {{ CURRENT_USER }}. Snipperize is a code clips warehouse, support {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+<meta name="author" content="{{ CURRENT_USER }}"/>
+<meta name="robots" content="All" />
+{% endblock %}
+{% block title_subs %}
+<span class="divider">/</span>{{ CURRENT_USER }}
+{% if CURRENT_LANGUAGE and CURRENT_TAG %}
+<span class="divider">/</span>{{ CURRENT_LANGUAGE.name }}<span class="divider">/</span>{{ CURRENT_TAG.name }}
+{% else %}{% if CURRENT_LANGUAGE %}
+<span class="divider">/</span>{{ CURRENT_LANGUAGE.name }}
+{% else %}{% if CURRENT_TAG %}
+<span class="divider">/</span>{{ CURRENT_TAG.name }}
+{% endif %}{% endif %}{% endif %}
+{% endblock %}
+{% block site_sub %}
+{{ CURRENT_USER }}'s favorite snippets
+{% endblock %}
+{% block promo %}
+<div class="promo orange"><a href="{% url user_detail CURRENT_USER.key.id %}" title="{{ CURRENT_USER }} snippets">{{ CURRENT_USER }}</a>'s favorite snippets.</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3402743572956545";
+/* Snipperize Search 728x15 */
+google_ad_slot = "2505060735";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+{% endblock %}
+{% block orange_promo %}
+Here are the favorite snippets collected by <a href="{% url user_detail CURRENT_USER.key.id %}" title="{{ CURRENT_USER }}">{{ CURRENT_USER }}</a>
+{% endblock %}
+{% block body_content %}
+{% if object_list %}
+{% if RELEVENT_LANGUAGES or RELEVENT_TAGS %}
+<div class="side-box">
+<div class="relevent_tags">
+    <h2>Profile</h2>
+    <ul>
+        <li>NAME: {{ CURRENT_USER }}</li>
+        <li>EMAIL: {{ CURRENT_USER.email }}</li>
+        <li>SNIPPETS: {{ CURRENT_USER_SNIPPERS_COUNT }}</li>
+        <li>FAVORITES: <a href="{% url user_favorites CURRENT_USER.key.id %}" title="{{ CURRENT_USER }} favorite snippets">{{ CURRENT_USER_FAVORITES_COUNT }}</a></li>
+    </ul>
+</div>
+{% if RELEVENT_LANGUAGES %}
+<div class="relevent_tags">
+    <h2>Relevent Languages</h2>
+    <ul>
+        {% for lang in RELEVENT_LANGUAGES %}
+        <li><a href="{% url user_language_snippets lang.key CURRENT_USER.key.id %}" title="{{ lang.name }} snippets">{{ lang.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% if RELEVENT_TAGS %}
+<div class="relevent_tags">
+    <h2>Relevent Tags</h2>
+    <ul>
+        {% for tag in RELEVENT_TAGS %}
+        <li><a href="{% url user_tag_snippets tag.get_escape_name tag.key.id CURRENT_USER.key.id %}" title="{{ tag.name }} snippets">{{ tag.name }}</a></li>
+        {% endfor %}
+        <li><a href="{% url user_tag_list CURRENT_USER.key.id %}" title="more tags">more tags</a></li>
+    </ul>
+</div>
+{% endif %}
+</div>
+{% endif %}
+{% for favorite in object_list %}
+    {% ifequal forloop.counter 2 %}
+    <script type="text/javascript"><!--
+    google_ad_client = "pub-3402743572956545";
+    /* Snipperize Search 468&#42;60 */
+    google_ad_slot = "3813263902";
+    google_ad_width = 468;
+    google_ad_height = 60;
+    //-->
+    </script>
+    <script type="text/javascript"
+    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+    {% endifequal %}
+    {% ifequal forloop.counter 5 %}
+    <script type="text/javascript"><!--
+    google_ad_client = "pub-3402743572956545";
+    /* Snipper Search 468x15 */
+    google_ad_slot = "5669846653";
+    google_ad_width = 468;
+    google_ad_height = 15;
+    //-->
+    </script>
+    <script type="text/javascript"
+    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+    {% endifequal %}
+    {% ifequal forloop.counter 7 %}
+    <script type="text/javascript"><!--
+    google_ad_client = "pub-3402743572956545";
+    /* Snipper Search 468x15 */
+    google_ad_slot = "5669846653";
+    google_ad_width = 468;
+    google_ad_height = 15;
+    //-->
+    </script>
+    <script type="text/javascript"
+    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+    {% endifequal %}
+    <h2>{% ifequal favorite.snippet.author.email request.current_user.email %}<span class="editsection">[<a href="{{ favorite.snippet.get_edit_url }}" title="edit this snippet">edit</a>]</span><span class="deletesection">[<a href="{{ favorite.snippet.get_delete_url }}" title="delete this snippet">delete</a>]</span>{% endifequal %}<span class="mw-headline"><a href="{{ favorite.snippet.get_absolute_url }}" title="{{ favorite.snippet.title }}">{{ favorite.snippet.title }}</a></span></h2>
+    <p><span style="background:yellow"><a href="{% url language_snippets favorite.snippet.language %}" title="{{ favorite.snippet.get_language.name }}">{{ favorite.snippet.get_language.name }}</a></span>{% for tag in favorite.snippet.get_tags %}{% if forloop.first %} / {% endif %}{% if tag %}<code><a href="{% url language_tag_snippets favorite.snippet.language tag.get_escape_name tag.key.id %}" title="{{ favorite.snippet.get_language.name }} {{ tag.name }}">{{ tag.name }}</a></code>{% endif %}{% if forloop.last %} / {% else %}, {% endif %}{% endfor %}by <a href="{{ favorite.snippet.author.get_absolute_url }}" title="{{ favorite.snippet.author.user.nickname }}'s snippets">{{ favorite.snippet.author.user.nickname }}</a> ({% ifnotequal favorite.snippet.elapsed.days 0 %}{{ favorite.snippet.elapsed.days }} days, {% endifnotequal %}{{ favorite.snippet.elapsed.hours|floatformat:2 }} hours ago)</p>
+{% endfor %}
+{% paginator %}
+{% else %}
+<p><span style="background:yellow">There's no favorite snippets collected by <a href="{% url user_detail CURRENT_USER.key.id %}" title="{{ CURRENT_USER }}">{{ CURRENT_USER }}</a></p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block js %}
+{% endblock %}
+{% block title %}Edit Snippet - {{ snippet.title }} - Snipperize{% endblock %}
+{% block meta %}
+<meta name="author" content="Prof.Syd.Xu" />
+<meta name="robots" content="noindex" />
+{% endblock %}
+{% block promo %}
+<div class="promo green">Snipperize is a code clips warehouse, support nearly all the computer languages.</div>
+{% endblock %}
+{% block body_content %}
+<h2><span class="mw-headline">Edit Snippet</span></h2>
+<p>You are editing snippet {{ snippet.title }}.</p>
+<form class="box-bottom" id="snippetAddForm" name="snippetAddForm" method="post" action="{{ snippet.get_edit_url }}">
+    <p class="textfield"><label for="title">Title</label>{{ form.title }}{% if form.title.errors %}<ul class="warn">{% for e in form.title.errors %}<li>{{e}}</li>{% endfor %}</ul>{% endif %}</p>
+    <p class="selectbox"><label for="language">Language</label>{{ form.language }}{% if form.language.errors %}<ul class="warn">{% for e in form.language.errors %}<li>{{e}}</li>{% endfor %}</ul>{% endif %}</p>
+    <p class="textfield"><label for="url">URL</label>{{ form.url }}{% if form.url.errors %}<ul class="warn">{% for e in form.url.errors %}<li>{{e}}</li>{% endfor %}</ul>{% endif %}</p>
+    <p class="textarea"><label for="code">Code</label>{{ form.code }}{% if form.code.errors %}<ul class="warn">{% for e in form.code.errors %}<li>{{e}}</li>{% endfor %}</ul>{% endif %}</p>
+    <p class="textarea"><label for="comment">Comment</label>{{ form.comment }}{% if form.comment.errors %}<ul class="warn">{% for e in form.comment.errors %}<li>{{e}}</li>{% endfor %}</ul>{% endif %}</p>
+    <p class="textfield"><label for="tag">Tags</label>{{ form.tag }}{% if form.tag.errors %}<ul class="warn">{% for e in form.tag.errors %}<li>{{e}}</li>{% endfor %}</ul>{% endif %}</p>
+    <p>{{ form.private }}<label for="private">Private</label>{% if form.private.errors %}<ul class="warn">{% for e in form.private.errors %}<li>{{e}}</li>{% endfor %}</ul>{% endif %}</p>
+    {% if system_error %}<p><ul class="warn"><li>系统错误, 请稍后再试.</li></ul></p>{% endif %}
+    <p><input type="submit" class="submit" value="SUBMIT"/></p>
+</form>
+{% endblock %}

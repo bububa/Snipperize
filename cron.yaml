@@ -1,0 +1,55 @@
+cron:
+- description: daily tags correlation calculation from 0
+  url: /tasks/update_tag_correlations/0/
+  schedule: every mon,tue,wed,thu,fri,sat,sun of jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec 06:30
+  timezone: Asia/Shanghai
+
+- description: daily tags correlation calculation from 10
+  url: /tasks/update_tag_correlations/10/
+  schedule: every mon,tue,wed,thu,fri,sat,sun of jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec 06:40
+  timezone: Asia/Shanghai
+
+- description: daily tags correlation calculation from 20
+  url: /tasks/update_tag_correlations/20/
+  schedule: every mon,tue,wed,thu,fri,sat,sun of jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec 06:50
+  timezone: Asia/Shanghai
+
+- description: daily tags correlation calculation from 30
+  url: /tasks/update_tag_correlations/30/
+  schedule: every mon,tue,wed,thu,fri,sat,sun of jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec 07:00
+  timezone: Asia/Shanghai
+
+- description: daily tags correlation calculation from 40
+  url: /tasks/update_tag_correlations/40/
+  schedule: every mon,tue,wed,thu,fri,sat,sun of jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec 07:10
+  timezone: Asia/Shanghai
+
+- description: daily tags correlation calculation from 50
+  url: /tasks/update_tag_correlations/50/
+  schedule: every mon,tue,wed,thu,fri,sat,sun of jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec 07:20
+  timezone: Asia/Shanghai
+
+- description: daily tags correlation calculation from 60
+  url: /tasks/update_tag_correlations/60/
+  schedule: every mon,tue,wed,thu,fri,sat,sun of jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec 07:30
+  timezone: Asia/Shanghai
+
+- description: daily tags correlation calculation from 70
+  url: /tasks/update_tag_correlations/70/
+  schedule: every mon,tue,wed,thu,fri,sat,sun of jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec 07:40
+  timezone: Asia/Shanghai
+
+- description: daily tags correlation calculation from 80
+  url: /tasks/update_tag_correlations/80/
+  schedule: every mon,tue,wed,thu,fri,sat,sun of jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec 07:50
+  timezone: Asia/Shanghai
+
+- description: daily tags correlation calculation from 90
+  url: /tasks/update_tag_correlations/90/
+  schedule: every mon,tue,wed,thu,fri,sat,sun of jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec 08:00
+  timezone: Asia/Shanghai
+
+- description: daily tags correlation calculation from 100
+  url: /tasks/update_tag_correlations/100/
+  schedule: every mon,tue,wed,thu,fri,sat,sun of jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec 08:10
+  timezone: Asia/Shanghai

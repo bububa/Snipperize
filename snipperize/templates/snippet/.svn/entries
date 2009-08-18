@@ -1,0 +1,65 @@
+8
+
+dir
+0
+https://snipperize.googlecode.com/svn/trunk/snipperize/templates/snippet
+https://snipperize.googlecode.com/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+snippet_list.html
+file
+
+
+
+add
+
+snippet_detail.html
+file
+
+
+
+add
+
+snippet_sitemap.html
+file
+
+
+
+add
+
+tag_list.html
+file
+
+
+
+add
+
+snippet_edit.html
+file
+
+
+
+add
+
+snippet_list_base.html
+file
+
+
+
+add
+
+snippet_add.html
+file
+
+
+
+add
+

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load paginator %}
+{% load timezone %}
+{% block title %}{{ CURRENT_USER }} - {% if CURRENT_LANGUAGE %}{{ CURRENT_LANGUAGE.name }} - {% endif %}TAGS - Snipperize{% endblock %}
+{% block meta %}
+<meta name="keywords" content="{{ CURRENT_USER }}, {% if CURRENT_LANGUAGE %}{{ CURRENT_LANGUAGE.name }} code, {{ CURRENT_LANGUAGE.name }} programming, {{ CURRENT_LANGUAGE.name }}, {{ CURRENT_LANGUAGE.name }} tags {% else %} {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }} tags{% if not forloop.last %}, {% endif %}{% endfor %}, {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}" />
+<meta name="description" content="Here are the {% if CURRENT_LANGUAGE %}{{ CURRENT_LANGUAGE.name }} {% endif %}tags of {{ CURRENT_USER }}. Snipperize is a code clips warehouse, support {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+{% endblock %}
+{% block promo %}
+ <div class="promo orange">Here are the {% if CURRENT_LANGUAGE %}<a href="{% url language_snippets CURRENT_LANGUAGE.key %}" title="{{ CURRENT_LANGUAGE.name }} snippets">{{ CURRENT_LANGUAGE.name }}</a> {% endif %}tags of <a href="{{ CURRENT_USER.get_absolute_url }}" title="{{ CURRENT_USER }}'s snippets">{{ CURRENT_USER }}</a>. Please choose your favorite one.</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3402743572956545";
+/* Snipperize Tags 728x15 */
+google_ad_slot = "6666776558";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+{% endblock %}
+{% block site_sub %}
+{% if CURRENT_LANGUAGE %}{{ CURRENT_LANGUAGE.name }} {% endif %}tags of {{ CURRENT_USER }}
+{% endblock %}
+{% block body_content %}
+<h2><span class="mw-headline"><a href="{{ CURRENT_USER.get_absolute_url }}" title="{{ CURRENT_USER }}'s snippets">{{ CURRENT_USER }}</a>{% if CURRENT_LANGUAGE %} - <a href="{% url user_language_snippets CURRENT_LANGUAGE.key CURRENT_USER.key.id %}" title="{{ CURRENT_USER }}'s {{ CURRENT_LANGUAGE.name }} snippets">{{ CURRENT_LANGUAGE.name }}</a>{% endif %}</span></h2>
+<script type="text/javascript"><!--
+google_ad_client = "pub-3402743572956545";
+/* Snipperize Tags 728x15 */
+google_ad_slot = "6666776558";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+{% if object_list %}
+{% for tag in object_list %}
+    <code><a href="{% if CURRENT_LANGUAGE %}{% url user_language_tag_snippets CURRENT_LANGUAGE.key tag.get_escape_name tag.key.id  CURRENT_USER.key.id %}{% else %}{% url user_tag_snippets tag.get_escape_name tag.key.id CURRENT_USER.key.id %}{% endif %}" title="{{ CURRENT_USER }}'s {{ tag.get_language.name }} {{ tag.name }} snippets">{{ tag.name }}</a></code>{% if not forloop.last %}, {% endif %}
+{% endfor %}
+{% paginator %}
+{% else %}
+<p><span style="background:yellow">There's no tags{% if CURRENT_LANGUAGE %} for <a href="{% url user_language_snippets CURRENT_LANGUAGE.key CURRENT_USER.key.id %}" title="{{ CURRENT_USER }}'s {{ CURRENT_LANGUAGE.name }} snippets">{{ CURRENT_LANGUAGE.name }}</a>{% endif %} of <a href="{{ CURRENT_USER.get_absolute_url }}" title="{{ CURRENT_USER }}'s snippets">{{ CURRENT_USER }}</a>{{ CURRENT_USER }}</a>. Do you want to <a href="{% url snippet_add %}" title="add new snippet">add your snippets</a>?</span></p>
+{% endif %}
+<script type="text/javascript"><!--
+google_ad_client = "pub-3402743572956545";
+/* Snipperize Tags 728x90 */
+google_ad_slot = "6097735329";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+{% endblock %}

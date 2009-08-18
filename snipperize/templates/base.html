@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Django1.0 | Coda 1.6.4 | Textmate" />
+	<meta name="publisher" content="Prof.Syd.Xu (prof.syd.xu@gmail.com)" />
+	<meta name="designer" content="Alex Gorbatchev" />
+	<meta name="distribution" content="Global" />
+	{% block meta %}{% endblock %}
+	<meta name="verify-v1" content="cz9DizbIXJeR4jj3sOsH4Vl5JxCrWrA5W9h9SRRNjZw=" />
+	<meta name="y_key" content="8157d7fba1d5c588" />
+	<meta name="y_key" content="97d7489ac0bc2655" />
+	<meta name="msvalidate.01" content="76FF52BA80F55AE4482B2EC55F39AD13" />
+	{% comment %}<link type="text/css" rel="stylesheet" media="screen, projection" href="/w/skins/alexg/main.css?164"/>{% endcomment %}
+	<link rel="search" type="application/opensearchdescription+xml" href="{% url opensearch %}" title="Snipperize Open Search" />
+	{% if CURRENT_USER %}
+	<link rel="alternate" type="application/rss+xml" title="Snipperize {{CURRENT_USER.user.nickname}} snippets RSS Feed" href="/feeds/user/{{CURRENT_USER.key.id}}/" />
+	{% else %}{% if CURRENT_LANGUAGE and CURRENT_TAG %}
+	<link rel="alternate" type="application/rss+xml" title="Snipperize {{CURRENT_LANGUAGE.name}} snippets talking about {{CURRENT_TAG.name}} RSS Feed" href="/feeds/language_tag/{{CURRENT_LANGUAGE.key}}/{{CURRENT_TAG.key.id}}/" />
+	{% else %}{% if CURRENT_LANGUAGE %}
+	<link rel="alternate" type="application/rss+xml" title="Snipperize {{CURRENT_LANGUAGE.name}} snippets RSS Feed" href="/feeds/language/{{CURRENT_LANGUAGE.key}}/" />
+	{% else %}{% if CURRENT_TAG %}
+	<link rel="alternate" type="application/rss+xml" title="Snipperize {{CURRENT_TAG.name}} snippets RSS Feed" href="/feeds/tag/{{CURRENT_TAG.key.id}}/" />
+	{% else %}
+	<link rel="alternate" type="application/rss+xml" title="Snipperize RSS Feed" href="/feeds/latest/" />
+	{% endif %}{% endif %}{% endif %}{% endif %}
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link type="text/css" href="/media/css/base.css?v=200908071010" rel="stylesheet" media="screen" />
+    {% block css %}{% endblock %}
+    <title>{% block title %}Snipperize{% endblock %}</title>
+</head>
+<body{% block body_class %}{% endblock %}>
+    <div class="layout">
+        <div class="main">
+            <div class="content">
+                <div class="title">
+                    <h1>{ <a href="{% url index %}" title="Snipperize Homepage">Snipperize</a> }{% block title_subs %}{% endblock %}</h1>
+                </div>
+                <h3 class="site-sub">{% block site_sub %}{% endblock %}</h3>
+                <div class="contentSub">{% block content_sub%}{% endblock %}</div>
+                <div class="catlinks" id="catlinks">
+                    <div id="mw-normal-catlinks">
+                        <form name="searchForm" id="searchForm" action="{% url snippet_search %}" method="get">
+                            <fieldset>
+                            <select name="search_language">
+								<option value="">All languages</option>
+							{% for alias, lang in request.SUPPORT_LANGUAGES.items %}
+								<option value="{{ alias }}">{{ lang }}</option>
+							{% endfor %}
+							</select>
+							<input type="text" name="keyword"/>
+                            <input type="submit" name="search_submit_btn" value="Search"/>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="body">
+                    {% block promo %}{% endblock %}
+                    {% block body_content %}{% endblock %}
+                </div>
+                <div class="page-nav li-links">
+                    <ul>
+                        {% ifequal CURRENT_PAGE 'snippet_list' %}<li class="selected">Home</li>{% else %}<li><a href="{% url index %}" title="Snipperize homepage">Home</a></li>{% endifequal %}
+                        {% ifequal CURRENT_PAGE 'snippet_add' %}<li class="selected">New Snippet</li>{% else %}<li><a href="{% url snippet_add %}" title="add new snippet">New Snippet</a></li>{% endifequal %}
+                        {% if request.current_user %}
+                        {% ifequal CURRENT_PAGE 'user_snippets' %}<li class="selected">My Snippets</li>{% else %}<li><a href="{{ request.current_user.get_absolute_url }}" title="{{ request.current_user.nickname }} snippets">My Snippets</li>{% endifequal %}
+                        {% endif %}
+                        {% if SUPPORT_LANGUAGES %}<li class="selected">Languages</li>{% else %}<li><a href="{% url language_list %}" title="Snipperize support languages">Languages</a></li>{% endif %}
+                    </ul>
+                </div>
+                <div style="clear:both"></div>
+                <div class="footer li-links">
+                    <ul>
+                    {% for alias, lang in request.SUPPORT_LANGUAGES.items %}
+                        <li><a href="{% url language_snippets alias %}" title="{{ lang }} snippets">{{ lang }}</a></li>
+                    {% endfor %}
+                    </ul>
+                    <p>Copyright 2009-2010 Prof.Syd.Xu. All rights reserved.<br/>Powered by Google Appengine, Built with Django 1.0</p>
+                    <ul>
+                        <li id="privacy"><a href="{% url policy %}" title="Privacy policy" rel="nofollow">Privacy policy</a></li>
+                        <li id="about"><a href="{% url about %}" title="About Prof.Syd.Xu">About Prof.Syd.Xu</a></li>
+                        <li id="recent-updates"><a href="{% url recent_updates %}" title="Recent Updates" rel="nofollow">Recent Updates</a></li>
+                        <li id="sitemap"><a href="{% url snippet_sitemap %}" title="Snipperize Sitemap">Sitemap</a></li>
+                        <li><script type="text/javascript" src="//counter.goingup.com/js/tracker.js?st=xyhjzyc&amp;b=13"></script>
+                        <noscript><a href="http://www.goingup.com" title=""><img src="//counter.goingup.com/default.php?st=xyhjzyc&amp;b=13" border="0" /></a></noscript></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header">
+            <div class="content">
+                <div class="name"><a href="{% url index %}" title="{{ request.SITE_DOMAIN }}">{{ request.SITE_DOMAIN }}</a></div>
+                <div class="menu li-links">
+                    <ul>
+                        {% if request.current_user %}
+                        <li><a href="{{ request.current_user.get_absolute_url }}" title="{{ request.current_user.user }}">{{ request.current_user.email }}</a></li>
+                        <li><a href="{% url signout %}" title="Sign out snipperize">Sign Out</a></li>
+                        {% else %}
+                        <li><a href="{% url signin %}" title="Sign in snipperize" rel="nofollow">Sign In</a></li>
+                        {% endif %}
+                        <li><a href="{% url faq %}" title="How to use snipperize" rel="nofollow">FAQ</a></li>
+                        <li><a href="{% url api_key %}" title="Get your API KEY" rel="nofollow">API KEY</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="/media/js/prototype.js"></script>
+{% block js %}{% endblock %}
+<!-- Include the Google Analytics javascript library. -->
+<script type="text/javascript">
+window.google_analytics_uacct = "UA-254029-9";
+</script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-254029-9");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</html>

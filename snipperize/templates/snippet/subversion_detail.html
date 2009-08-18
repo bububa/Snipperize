@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load timezone %}
+{% block title %}{{ subversion.title }} - Version:{{ subversion }} - -{{ subversion.get_language.name }} - Snipperize{% endblock %}
+{% block meta %}
+<meta name="keywords" content="{{ subversion.get_language.name}} snippet, {{ subversion.get_language.name }}, {{ subversion.language }}, {{ subversion.language }} snippet, {% for tag in subversion.snippet.get_tags %}{{ tag.name }} snippet{% if not forloop.last %}, {% endif %}{% endfor %}, {% for tag in snippet.get_tags %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+<meta name="description" content="{{ subversion.title }} version:{{ subversion }}. This is a {{ subversion.language }} snippet, talking about {% for tag in subversion.snippet.get_tags %}{{ tag.name }}{% ifequal forloop.revcounter0 1 %} and {% else %}{% if not forloop.last %}, {% endif %}{% endifequal %}{% endfor %}" />
+<meta name="author" content="{{ subversion.snippet.author.user.nickname }}"/>
+<meta name="robots" content="All" />
+{% endblock %}
+{% block css %}
+<link type="text/css" href="/media/css/shCore.css?v=200906211852" rel="stylesheet">
+<link type="text/css" href="/media/css/shThemeDefault.css?v=200906211852" rel="stylesheet">
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="/media/js/shCore.js?v=200906211852"></script>
+<script type="text/javascript">
+SyntaxHighlighter.config.clipboardSwf = '/media/img/clipboard.swf';
+SyntaxHighlighter.all();
+</script>
+{% endblock %}
+{% block site_sub %}
+<!-- google_ad_section_start -->
+{{ subversion.title }} - Version:{{ subversion }}
+<!-- google_ad_section_end -->
+{% endblock %}
+{% block promo %}
+<!-- google_ad_section_start -->
+<div class="promo green">Version: {{ subversion }}. This is a <a href="{% url language_snippets subversion.snippet.language %}" title="{{ subversion.get_language.name}} snippets">{{ subversion.get_language.name}}</a> snippet, talking about {% for tag in subversion.snippet.get_tags %}<code><a href="{% url language_tag_snippets subversion.language tag.get_escape_name tag.key.id %}" title="{{subversion.get_language.name}} {{ tag.name }} snippets">{{ tag.name }}</a></code>{% ifequal forloop.revcounter0 1 %} and {% else %}{% if not forloop.last %}, {% endif %}{% endifequal %}{% endfor %}</div>
+<div class="promo orange"><a href="{% url language_snippets subversion.language %}" title="{{ subversion.get_language.name}} snippets">{{ subversion.get_language.name}}</a>: 
+{% for tag in subversion.snippet.get_tags %}<code><a href="{% url language_tag_snippets subversion.language tag.get_escape_name tag.key.id %}" title="{{ subversion.get_language.name }} {{ tag.name }} snippets">{{ tag.name }}</a></code>{% if not forloop.last %}, {% endif %}{% endfor %}</div>
+<!-- google_ad_section_end -->
+<script type="text/javascript"><!--
+google_ad_client = "pub-3402743572956545";
+/* Snipperize Snippet 728x15 */
+google_ad_slot = "7503406001";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+{% endblock %}
+{% block body_content %}
+<div class="side-box">
+    <div class="side-ads">
+        <script type="text/javascript"><!--
+        google_ad_client = "pub-3402743572956545";
+        /* Snipperize Snippet 180x150 */
+        google_ad_slot = "0996627740";
+        google_ad_width = 180;
+        google_ad_height = 150;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+    </div>
+    <div class="relevent_tags">
+        <h2>Versions</h2>
+        <ul>
+    		<li><a href="{{ subversion.snippet.get_absolute_url }}" title="{{ subversion.snippet.title}} last version">last version</li>
+    		<!-- google_ad_section_start -->
+            {% for sv in subversion.snippet.get_subversions %}
+            <li><a href="{{ sv.get_absolute_url }}" title="{{ subversion.snippet.title }}, version {{ sv.title }}"{% ifequal subversion.key.id sv.key.id %}class="new"{% endifequal %}>{{ sv }}</a></li>
+            {% endfor %}
+            <!-- google_ad_section_end -->
+        </ul>
+    </div>
+    <div class="side-ads">
+        <script type="text/javascript"><!--
+        google_ad_client = "pub-3402743572956545";
+        /* Snipperize Snippet 120x240 */
+        google_ad_slot = "2507391108";
+        google_ad_width = 120;
+        google_ad_height = 240;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+    </div>
+</div>
+<div class="main-box">
+<!-- google_ad_section_start -->
+<h2>{% ifequal subversion.snippet.author.email request.current_user.email %}<span class="editsection">[<a href="{{ subversion.snippet.get_edit_url }}" title="edit this snippet">edit</a>]</span><span class="deletesection">[<a href="{{ subversion.snippet.get_delete_url }}" title="delete this snippet">delete</a>]</span>{% endifequal %}<span class="mw-headline"> {{ subversion.title }} </span></h2>
+{% if subversion.snippet.private %}
+{% ifnotequal subversion.snippet.author.email request.current_user.email %}
+This snippet is set to be private only, if you are interested in this script, please contact the author.
+{% else %}
+<pre class="brush: {% ifequal subversion.language 'apache' %}plain{% else %}{{ subversion.language }}{% endifequal %};">{{ subversion.code }}</pre>
+{% if subversion.url %}URL: <a href="{{ subversion.url }}" rel="nofollow" target="_blank" class="external">{{ subversion.url }}</a><br/>{% endif %}
+{% if subversion.comment %}{{ subversion.markdown_comment|safe }}{% endif %}
+{% endifnotequal %}
+{% else %}
+<pre class="brush: {% ifequal subversion.language 'apache' %}plain{% else %}{{ subversion.language }}{% endifequal %};">{{ subversion.code }}</pre>
+{% if subversion.url %}URL: <a href="{{ subversion.url }}" rel="nofollow" target="_blank" class="external">{{ subversion.url }}</a><br/>{% endif %}
+{% if subversion.comment %}{{ subversion.markdown_comment|safe }}{% endif %}
+{% endif %}
+<!-- google_ad_section_end -->
+<script type="text/javascript"><!--
+google_ad_client = "pub-3402743572956545";
+/* Snipperize Snippet 468x60 */
+google_ad_slot = "6247732783";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<p>Created by <a href="{{ subversion.snippet.author.get_absolute_url }}" title="{{ subversion.snippet.author.user.nickname }}'s snippets">{{ subversion.snippet.author.user.nickname }}</a> ({% ifnotequal subversion.elapsed.days 0 %}{{ subversion.elapsed.days }} days, {% endifnotequal %}{{ subversion.elapsed.hours|floatformat:2 }} hours ago)</p>
+</div>
+<div class="comment-box">
+<div>
+{% if request.current_user %}
+<form name="commentForm" id="commentForm" method="post" action="{{ subversion.get_absolute_url }}">
+<p class="textarea"><label for="commentContent">Message:</label><textarea id="commentContent" name="commentContent"></textarea></p>
+<p><input type="submit" class="submit" value="Leave a mesage"/></p>
+</form>
+{% else %}
+Do you want to leave a message? Please <a href="{% url signin %}" title="sign in">login</a> first.
+{% endif %}
+</div>
+{% if comments %}
+<ul class="comments">
+	{% for c in comments %}
+	<li>
+		<a href="{{ c.author.get_absolute_url }}" title="{{ c.author.user.nickname }}'s snippets">{{ c.author }}</a> said: {{ c.content }}<small>({% ifnotequal c.elapsed.days 0 %}{{ c.elapsed.days }} days, {% endifnotequal %}{{ c.elapsed.hours|floatformat:2 }} hours ago)</small>
+	</li>
+	{% endfor %}
+</ul>
+{% endif %}
+</div>
+{% endblock %}

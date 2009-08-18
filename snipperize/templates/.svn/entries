@@ -1,0 +1,72 @@
+8
+
+dir
+0
+https://snipperize.googlecode.com/svn/trunk/snipperize/templates
+https://snipperize.googlecode.com/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+snippet
+dir
+
+
+
+add
+
+feeds
+dir
+
+
+
+add
+
+paginator.html
+file
+
+
+
+add
+
+500.html
+file
+
+
+
+add
+
+404.html
+file
+
+
+
+add
+
+account
+dir
+
+
+
+add
+
+support
+dir
+
+
+
+add
+
+base.html
+file
+
+
+
+add
+

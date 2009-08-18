@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /signin/
+Disallow: /signout/
+Disallow: /snippet/add/
+Disallow: /snippet/edit/
+
+Sitemap: http://snipperize.todayclose.com/sitemap/
