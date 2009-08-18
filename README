@@ -1,0 +1,29 @@
+Snipperize is a django based programming language code snippets warehouse hosted on google appengine.
+You could use it to setup your own snippets website.
+
+[Supporting Languages]
+Perl
+PHP
+PowerShell
+Python
+C#
+C++
+CSS
+Javascript
+Java
+SQL
+Visual Basic
+XML/HTML
+Objective-C
+Ruby/Rails
+ActionScript3
+AppleScript
+Bash/Shell
+ColdFusion
+Delphi
+Diff
+Groovy
+JavaFX
+Apache
+Ada
+Scala
