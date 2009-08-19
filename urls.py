@@ -37,9 +37,9 @@ urlpatterns = patterns('',
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT}),
     #(r'^about/$', 'syd.blog.views.about'),
     (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
-    (r'^tasks/update_tag_correlations/(?P<offset>\d+)/$', 'snipperize.task.views.update_tag_correlations')
-    #url (r'^canvas.html$', blog_views.canvas, name='canvas'),
-    #url (r'^rpc_relay.html$', blog_views.rpc_relay, name='rpc_relay'),
+    (r'^tasks/update_tag_correlations/(?P<offset>\d+)/$', 'snipperize.task.views.update_tag_correlations'),
+    url (r'^canvas.html$', support_views.canvas, name='canvas'),
+    url (r'^rpc_relay.html$', support_views.rpc_relay, name='rpc_relay'),
     # Uncomment this for admin:
     #(r'^admin/', include('django.contrib.admin.urls')),
 )

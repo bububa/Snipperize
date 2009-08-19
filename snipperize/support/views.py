@@ -32,6 +32,12 @@ def opensearch(request):
     response['Content-Type'] = "application/xhtml+xml; charset=utf-8"
     return response
 
+def canvas(request):
+    return render_to_response('support/canvas.html')
+
+def rpc_relay(request):
+    return render_to_response('support/rpc_relay.html')
+    
 def api_opensearch(request):
     if request.GET.has_key('keyword'):
         words = request.GET['keyword'].split('/')
