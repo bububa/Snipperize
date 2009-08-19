@@ -89,12 +89,12 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 This snippet is set to be private only, if you are interested in this script, please contact the author.
 {% else %}
 <pre class="brush: {% ifequal subversion.language 'apache' %}plain{% else %}{{ subversion.language }}{% endifequal %};">{{ subversion.code }}</pre>
-{% if subversion.url %}URL: <a href="{{ subversion.url }}" rel="nofollow" target="_blank" class="external">{{ subversion.url }}</a><br/>{% endif %}
+{% if subversion.url %}URL: <a href="{{ subversion.url }}" rel="noindex" target="_blank" class="external">{{ subversion.url }}</a><br/>{% endif %}
 {% if subversion.comment %}{{ subversion.markdown_comment|safe }}{% endif %}
 {% endifnotequal %}
 {% else %}
 <pre class="brush: {% ifequal subversion.language 'apache' %}plain{% else %}{{ subversion.language }}{% endifequal %};">{{ subversion.code }}</pre>
-{% if subversion.url %}URL: <a href="{{ subversion.url }}" rel="nofollow" target="_blank" class="external">{{ subversion.url }}</a><br/>{% endif %}
+{% if subversion.url %}URL: <a href="{{ subversion.url }}" rel="noindex" target="_blank" class="external">{{ subversion.url }}</a><br/>{% endif %}
 {% if subversion.comment %}{{ subversion.markdown_comment|safe }}{% endif %}
 {% endif %}
 <!-- google_ad_section_end -->

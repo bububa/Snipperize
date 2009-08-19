@@ -84,18 +84,18 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 {% endif %}
 <div class="main-box">
 <!-- google_ad_section_start -->
-<h2>{% if snippet.is_editable %}<span class="editsection">[<a href="{{ snippet.get_edit_url }}" title="edit this snippet">edit</a>]</span><span class="deletesection">[<a href="{{ snippet.get_delete_url }}" title="delete this snippet" onclick="return confirm('Are you sure you want to delete this snippet?')">delete</a>]</span>{% endif %}<span class="mw-headline"> {{ snippet.title }} </span>{% if request.current_user %}{% if snippet.is_fav %}<a class="unfav_button" href="{% url del_fav_snippet snippet.key.id %}" rel="nofollow" onclick="return false;">Delete from Favorite</a>{% else %}<a class="fav_button" href="{% url add_fav_snippet snippet.key.id %}" rel="nofollow" onclick="return false;">Add to Favorite</a>{% endif %}{% else %}<a class="fav_button" href="{% url signin %}" title="signin please" rel="nofollow" onclick="return false;">Add to Favorite</a>{% endif %}{% if snippet.private %}<span class="private">private</span>{% endif %}</h2>
+<h2>{% if snippet.is_editable %}<span class="editsection">[<a href="{{ snippet.get_edit_url }}" title="edit this snippet">edit</a>]</span><span class="deletesection">[<a href="{{ snippet.get_delete_url }}" title="delete this snippet" onclick="return confirm('Are you sure you want to delete this snippet?')">delete</a>]</span>{% endif %}<span class="mw-headline"> {{ snippet.title }} </span>{% if request.current_user %}{% if snippet.is_fav %}<a class="unfav_button" href="{% url del_fav_snippet snippet.key.id %}" rel="noindex" onclick="return false;">Delete from Favorite</a>{% else %}<a class="fav_button" href="{% url add_fav_snippet snippet.key.id %}" rel="noindex" onclick="return false;">Add to Favorite</a>{% endif %}{% else %}<a class="fav_button" href="{% url signin %}" title="signin please" rel="noindex" onclick="return false;">Add to Favorite</a>{% endif %}{% if snippet.private %}<span class="private">private</span>{% endif %}</h2>
 {% if snippet.private %}
 {% if not snippet.is_editable %}
 This snippet is set to be private only, if you are interested in this script, please contact the author.
 {% else %}
 <pre class="brush: {% ifequal snippet.language 'apache' %}plain{% else %}{{ snippet.language }}{% endifequal %};">{{ snippet.code }}</pre>
-{% if snippet.url %}URL: <a href="{{ snippet.url }}" rel="nofollow" target="_blank" class="external">{{ snippet.url }}</a><br/>{% endif %}
+{% if snippet.url %}URL: <a href="{{ snippet.url }}" rel="noindex" target="_blank" class="external">{{ snippet.url }}</a><br/>{% endif %}
 {% if snippet.comment %}{{ snippet.markdown_comment|safe }}{% endif %}
 {% endif %}
 {% else %}
 <pre class="brush: {% ifequal snippet.language 'apache' %}plain{% else %}{{ snippet.language }}{% endifequal %};">{{ snippet.code }}</pre>
-{% if snippet.url %}URL: <a href="{{ snippet.url }}" rel="nofollow" target="_blank" class="external">{{ snippet.url }}</a><br/>{% endif %}
+{% if snippet.url %}URL: <a href="{{ snippet.url }}" rel="noindex" target="_blank" class="external">{{ snippet.url }}</a><br/>{% endif %}
 {% if snippet.comment %}{{ snippet.markdown_comment|safe }}{% endif %}
 {% endif %}
 <!-- google_ad_section_end -->

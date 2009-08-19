@@ -77,9 +77,9 @@
                     </ul>
                     <p>Copyright 2009-2010 Prof.Syd.Xu. All rights reserved.<br/>Powered by Google Appengine, Built with Django 1.0</p>
                     <ul>
-                        <li id="privacy"><a href="{% url policy %}" title="Privacy policy" rel="nofollow">Privacy policy</a></li>
+                        <li id="privacy"><a href="{% url policy %}" title="Privacy policy" rel="noindex">Privacy policy</a></li>
                         <li id="about"><a href="{% url about %}" title="About Prof.Syd.Xu">About Prof.Syd.Xu</a></li>
-                        <li id="recent-updates"><a href="{% url recent_updates %}" title="Recent Updates" rel="nofollow">Recent Updates</a></li>
+                        <li id="recent-updates"><a href="{% url recent_updates %}" title="Recent Updates" rel="noindex">Recent Updates</a></li>
                         <li id="sitemap"><a href="{% url snippet_sitemap %}" title="Snipperize Sitemap">Sitemap</a></li>
                         <li><script type="text/javascript" src="//counter.goingup.com/js/tracker.js?st=xyhjzyc&amp;b=13"></script>
                         <noscript><a href="http://www.goingup.com" title=""><img src="//counter.goingup.com/default.php?st=xyhjzyc&amp;b=13" border="0" /></a></noscript></li>
@@ -96,10 +96,10 @@
                         <li><a href="{{ request.current_user.get_absolute_url }}" title="{{ request.current_user.user }}">{{ request.current_user.email }}</a></li>
                         <li><a href="{% url signout %}" title="Sign out snipperize">Sign Out</a></li>
                         {% else %}
-                        <li><a href="{% url signin %}" title="Sign in snipperize" rel="nofollow">Sign In</a></li>
+                        <li><a href="{% url signin %}" title="Sign in snipperize" rel="noindex">Sign In</a></li>
                         {% endif %}
-                        <li><a href="{% url faq %}" title="How to use snipperize" rel="nofollow">FAQ</a></li>
-                        <li><a href="{% url api_key %}" title="Get your API KEY" rel="nofollow">API KEY</a></li>
+                        <li><a href="{% url faq %}" title="How to use snipperize" rel="noindex">FAQ</a></li>
+                        <li><a href="{% url api_key %}" title="Get your API KEY" rel="noindex">API KEY</a></li>
                     </ul>
                 </div>
             </div>
