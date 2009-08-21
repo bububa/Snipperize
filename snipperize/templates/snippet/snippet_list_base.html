@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block title %}{% if CURRENT_LANGUAGE %}{{ CURRENT_LANGUAGE.name }} {% endif %}{% if CURRENT_TAG %}{{ CURRENT_TAG.name }} {% endif %}Code Snippets Snipperize{% endblock %}
+{% block title %}{% if CURRENT_LANGUAGE %}{{ CURRENT_LANGUAGE.name }} {% endif %}{% if CURRENT_TAG %}{{ CURRENT_TAG.name }} {% endif %}Code Snippets Snipperize{% ifnotequal page 1 %} - page {{ page }}{% endifnotequal %}{% endblock %}
 {% block meta %}
 <meta name="keywords" content="{% if CURRENT_LANGUAGE %}{{ CURRENT_LANGUAGE.name }} code, {{ CURRENT_LANGUAGE.name }} programming, {{ CURRENT_LANGUAGE.name }}, {{ CURRENT_LANGUAGE.name }} snippets {% else %} {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }} snippets{% if not forloop.last %}, {% endif %}{% endfor %}, {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}" />
-<meta name="description" content="Here are the latest {% if CURRENT_LANGUAGE %}{{ CURRENT_LANGUAGE.name }} {% endif %} code snippets{% if CURRENT_LANGUAGE %} for {{ CURRENT_LANGUAGE.name }} programming{% endif %}{% if CURRENT_TAG %} talking about {{ CURRENT_TAG.name }}{% endif %}. Snipperize is a code clips warehouse, support {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
+<meta name="description" content="Here are the latest {% if CURRENT_LANGUAGE %}{{ CURRENT_LANGUAGE.name }} {% endif %} code snippets{% if CURRENT_LANGUAGE %} for {{ CURRENT_LANGUAGE.name }} programming{% endif %}{% if CURRENT_TAG %} talking about {{ CURRENT_TAG.name }}{% endif %}{% ifnotequal page 1 %} - page {{ page }}{% endifnotequal %}. Snipperize is a code clips warehouse, support {% for l, v in request.SUPPORT_LANGUAGES.items %}{{ v }}{% if not forloop.last %}, {% endif %}{% endfor %}" />
 <meta name="author" content="Prof.Syd.Xu" />
 <meta name="robots" content="All" />
 {% endblock %}
