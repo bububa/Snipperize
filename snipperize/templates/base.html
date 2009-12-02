@@ -38,6 +38,9 @@
                 </div>
                 <h3 class="site-sub">{% block site_sub %}{% endblock %}</h3>
                 <div class="contentSub">{% block content_sub%}{% endblock %}</div>
+                <div class="topbanner">
+                    <p style="margin-top:10px; margin-bottom:0; padding-bottom:0; text-align:center; line-height:0"><a target="_blank" href="http://feeds.feedburner.com/~r/snipperize/~6/1"><img src="http://feeds.feedburner.com/snipperize.1.gif" alt="Latest Snippets - Snipperize" style="border:0"></a></p><p style="margin-top:5px; padding-top:0; font-size:x-small; text-align:center"><a href="http://feedburner.google.com/fb/a/headlineanimator/install?id=2dderitfdcc1oj3llg3fev7a18&amp;w=1" onclick="window.open(this.href, 'haHowto', 'width=520,height=600,toolbar=no,address=no,resizable=yes,scrollbars'); return false" target="_blank">&uarr; Grab this Headline Animator</a></p>
+                </div>
                 <div class="catlinks" id="catlinks">
                     <div id="mw-normal-catlinks">
                         <form name="searchForm" id="searchForm" action="{% url snippet_search %}" method="get">
@@ -66,6 +69,11 @@
                         {% ifequal CURRENT_PAGE 'user_snippets' %}<li class="selected">My Snippets</li>{% else %}<li><a href="{{ request.current_user.get_absolute_url }}" title="{{ request.current_user.nickname }} snippets">My Snippets</li>{% endifequal %}
                         {% endif %}
                         {% if SUPPORT_LANGUAGES %}<li class="selected">Languages</li>{% else %}<li><a href="{% url language_list %}" title="Snipperize support languages">Languages</a></li>{% endif %}
+                        <li>
+                            <!-- AddThis Button BEGIN -->
+                            <a class="addthis_button" href="http://addthis.com/bookmark.php?v=250&amp;pub=xa-4acf71dc4dfce1c4"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pub=xa-4acf71dc4dfce1c4"></script>
+                            <!-- AddThis Button END -->
+                        </li>
                     </ul>
                 </div>
                 <div style="clear:both"></div>
@@ -81,6 +89,7 @@
                         <li id="about"><a href="{% url about %}" title="About Prof.Syd.Xu">About Prof.Syd.Xu</a></li>
                         <li id="recent-updates"><a href="{% url recent_updates %}" title="Recent Updates" rel="noindex">Recent Updates</a></li>
                         <li id="sitemap"><a href="{% url snippet_sitemap %}" title="Snipperize Sitemap">Sitemap</a></li>
+                        <li id="you8g"><a href="http://www.you8g.com/" title="Thanks." rel="noindex">Thanks you8g.com</a></li>
                         <li><script type="text/javascript" src="//counter.goingup.com/js/tracker.js?st=xyhjzyc&amp;b=13"></script>
                         <noscript><a href="http://www.goingup.com" title=""><img src="//counter.goingup.com/default.php?st=xyhjzyc&amp;b=13" border="0" /></a></noscript></li>
                     </ul>
@@ -150,4 +159,8 @@ try {
 var pageTracker = _gat._getTracker("UA-254029-9");
 pageTracker._trackPageview();
 } catch(err) {}</script>
+<!--[if lte IE 6]>
+	<script>var LETSKILLIE6_DELAY=3;</script>
+	<script src="http://letskillie6.googlecode.com/svn/trunk/letskillie6.pack.js"></script>
+<![endif]-->
 </html>
