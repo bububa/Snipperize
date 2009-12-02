@@ -18,7 +18,7 @@
 #from config import *
 import os
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -129,6 +129,8 @@ TAG_LIST_PAGE_SIZE = 30
 RELEVENT_TAG_LIMIT = 30
 
 SITE_DOMAIN = 'http://snipperize.todayclose.com'
-SITE_NAME = 'Snipperize'
+SITE_NAME = 'Code Snippets - Snipperize'
 
 SUPPORT_LANGUAGES = {'pl':'Perl', 'php':'PHP', 'plain':'Plain', 'ps':'PowerShell', 'py':'Python', 'csharp': 'C#', 'cpp':'C++', 'css':'CSS', 'js':'Javascript', 'java':'Java', 'sql':'SQL', 'vb':'Visual Basic', 'xml':'XML/HTML', 'objc':'Objective-C', 'ror':'Ruby/Rails', 'as3':'ActionScript3', 'applescript':'AppleScript', 'bash':'Bash/Shell', 'coldfusion':'ColdFusion', 'delphi':'Delphi', 'diff':'Diff', 'groovy':'Groovy', 'jfx':'JavaFX', 'apache':'Apache', 'ada':'Ada', 'scala':'Scala'}
+
+PING_LIST = ('http://blogsearch.google.com/ping/RPC2', 'http://www.feedsky.com/api/RPC2', 'http://blog.yodao.com/ping/RPC2', 'http://blog.iask.com/RPC2', 'http://www.xianguo.com/xmlrpc/ping.php', 'http://www.zhuaxia.com/rpc/server.php', 'http://api.my.yahoo.com/RPC2', 'http://rpc.technorati.com/rpc/ping', 'http://www.weblogues.com/RPC/', 'http://ping.feedburner.com/', 'http://ping.baidu.com/ping/RPC2')
