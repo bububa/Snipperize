@@ -21,6 +21,7 @@ from snipperize.utils.webutils import admin_required
 from snipperize.utils.webutils import is_admin
 from snipperize.utils.webutils import is_signin
 from snipperize.utils.webutils import object_list
+from snipperize.utils.GAEXMLRPCTransport import ping
 
 from snipperize.snippet.models import Snippet
 from snipperize.snippet.forms import SnippetForm
@@ -62,6 +63,7 @@ def snippet_add(request, profile_callback=None):
         if form.is_valid():
             new_snippet = form.save(profile_callback=profile_callback)
             memcache.flush_all()
+            ping()
             return HttpResponseRedirect('/')
 
     return render_to_response('snippet/snippet_add.html', {'form': form, 'CURRENT_PAGE':'snippet_add'}, context_instance=RequestContext(request))
@@ -86,7 +88,8 @@ def snippet_edit(request, snippet_id, profile_callback=None):
         logging.getLogger().debug(form)
         if form.is_valid():
             updated_snippet = form.edit(int(snippet_id), profile_callback=profile_callback)
-            memcache.flush_all()    
+            memcache.flush_all()
+            ping()
             return HttpResponseRedirect(updated_snippet.get_absolute_url())
 
     return render_to_response('snippet/snippet_edit.html', {'form': form, 'snippet': snippet}, context_instance=RequestContext(request))
@@ -125,7 +128,7 @@ def language_snippets(request, language):
         if l == language:
             current_language = {'name':v, 'key':l}
             break;
-    rev_tags = Tag.all().filter('languages', language).order('-number').fetch(settings.RELEVENT_TAG_LIMIT)
+    rev_tags = Tag.all().filter('languages', language).order('-number').order('-inserted_at').fetch(settings.RELEVENT_TAG_LIMIT)
            
     return object_list(request, queryset=snippets, allow_empty=True,
                 template_name='snippet/snippet_list.html', extra_context={'CURRENT_LANGUAGE': current_language, 'CURRENT_PAGE': 'snippet_list', 'RELEVENT_TAGS':rev_tags},
@@ -137,7 +140,7 @@ def language_tag_snippets(request, language, tag_name, tag_id):
     rev = TagCoef.all().filter('tag',tag.key()).order('distance').fetch(settings.RELEVENT_TAG_LIMIT)
     rev_tags = []
     if rev: rev_tags = [rt.related_tag for rt in rev if language in rt.related_tag.languages]
-    else: rev_tags = Tag.all().filter('languages', language).order('-number').fetch(settings.RELEVENT_TAG_LIMIT)
+    else: rev_tags = Tag.all().filter('languages', language).order('-number').order('-inserted_at').fetch(settings.RELEVENT_TAG_LIMIT)
     
     snippets = Tag.objects.snippets(tag)
     snippets = snippets.filter('language', language).order('-published_at')
@@ -156,7 +159,7 @@ def tag_snippets(request, tag_name, tag_id):
     rev = TagCoef.all().filter('tag',tag.key()).order('distance').fetch(settings.RELEVENT_TAG_LIMIT)
     rev_tags = []
     if rev: rev_tags = [rt.related_tag for rt in rev]
-    else: rev_tags = Tag.all().order('-number').fetch(settings.RELEVENT_TAG_LIMIT)
+    else: rev_tags = Tag.all().order('-number').order('-inserted_at').fetch(settings.RELEVENT_TAG_LIMIT)
     
     snippets = Tag.objects.snippets(tag)
     return object_list(request, queryset=snippets, allow_empty=True,
@@ -176,7 +179,7 @@ def snippet_search(request):
             snippets = Snippet.all().filter('language', request.GET['search_language']).order('-published_at')
         else:
             snippets = Snippet.all().order('-published_at')
-    rev_tags = Tag.all().order('-number').fetch(settings.RELEVENT_TAG_LIMIT)
+    rev_tags = Tag.all().order('-number').order('-inserted_at').fetch(settings.RELEVENT_TAG_LIMIT)
     return object_list(request, queryset=snippets, allow_empty=True,
                 template_name='snippet/snippet_list.html', extra_context={'is_admin': is_admin(), 'CURRENT_PAGE': 'snippet_list', 'RELEVENT_TAGS':rev_tags},
                 paginate_by=settings.SNIPPET_LIST_PAGE_SIZE)
@@ -184,14 +187,14 @@ def snippet_search(request):
 def snippet_list(request):
     snippets = Snippet.all().order('-published_at')
     
-    rev_tags = Tag.all().order('-number').fetch(settings.RELEVENT_TAG_LIMIT)
+    rev_tags = Tag.all().order('-number').order('-inserted_at').fetch(settings.RELEVENT_TAG_LIMIT)
     
     return object_list(request, queryset=snippets, allow_empty=True,
                 template_name='snippet/snippet_list.html', extra_context={'is_admin': is_admin(), 'CURRENT_PAGE': 'snippet_list', 'RELEVENT_TAGS':rev_tags},
                 paginate_by=settings.SNIPPET_LIST_PAGE_SIZE)
 
 def language_tags(request, language):
-    tags = Tag.all().filter('languages', language).order('-number')
+    tags = Tag.all().filter('languages', language).order('-number').order('-inserted_at')
     for l, v in settings.SUPPORT_LANGUAGES.items():
         if l == language:
             current_language = {'name':v, 'key':l}
@@ -201,7 +204,7 @@ def language_tags(request, language):
                 paginate_by=settings.TAG_LIST_PAGE_SIZE)
                 
 def tag_list(request):
-    tags = Tag.all().order('-number')
+    tags = Tag.all().order('-number').order('-inserted_at')
     return object_list(request, queryset=tags, allow_empty=True,
                 template_name='snippet/tag_list.html', extra_context={'CURRENT_PAGE': 'tag_list'},
                 paginate_by=settings.TAG_LIST_PAGE_SIZE)
@@ -209,14 +212,14 @@ def tag_list(request):
 def language_list(request):
     languages = []
     for alias, lang in settings.SUPPORT_LANGUAGES.items():
-        tags = Tag.all().filter('languages', alias).order('-number')
+        tags = Tag.all().filter('languages', alias).order('-number').order('-inserted_at')
         languages.append({'alias':alias, 'lang':lang, 'tags':tags.fetch(10)})
     return render_to_response('snippet/snippet_sitemap.html', {'SUPPORT_LANGUAGES': languages, 'CURRENT_PAGE':'language_list'}, context_instance=RequestContext(request))
     
 def snippet_sitemap(request):
     languages = []
     for alias, lang in settings.SUPPORT_LANGUAGES.items():
-        tags = Tag.all().filter('languages', alias).order('-number')
+        tags = Tag.all().filter('languages', alias).order('-number').order('-inserted_at')
         if not tags.count():continue
         languages.append({'alias':alias, 'lang':lang, 'tags':tags.fetch(10)})
     return render_to_response('snippet/snippet_sitemap.html', {'SUPPORT_LANGUAGES': languages}, context_instance=RequestContext(request))
