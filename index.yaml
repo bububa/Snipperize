@@ -149,8 +149,18 @@ indexes:
 # Unused in query history -- copied from input.
 - kind: Tag
   properties:
+  - name: number
+    direction: desc
+  - name: inserted_at
+    direction: desc
+    
+# Unused in query history -- copied from input.
+- kind: Tag
+  properties:
   - name: language
   - name: number
+    direction: desc
+  - name: inserted_at
     direction: desc
 
 # Unused in query history -- copied from input.
@@ -159,12 +169,16 @@ indexes:
   - name: languages
   - name: number
     direction: desc
+  - name: inserted_at
+    direction: desc
 
 # Unused in query history -- copied from input.
 - kind: Tag
   properties:
   - name: users
   - name: number
+    direction: desc
+  - name: inserted_at
     direction: desc
 
 # Unused in query history -- copied from input.
