@@ -4,6 +4,23 @@ Snipperize.prototype = {
     {
         this.AjaxPath="/ajax/";
         this.pid = 0;
+        this.preview_size = 10;
+        var self = this;
+        self.resize();
+        Event.observe(window, 'resize', function (){
+            self.resize();
+        });
+    },
+    
+    resize: function()
+    {
+        var self = this;
+        mainHeight = $('divFooter').cumulativeOffset().top - $('divNavTop').getHeight();
+        $('divLeftNav').setStyle({height: mainHeight/2 + 'px'});
+        $('divLeft').setStyle({height:mainHeight + 'px'});
+        $('divPreview').setStyle({height: self.preview_size + 'px'});
+        $('divListings').setStyle({height:(mainHeight - $('divPreview').getHeight()) + 'px'});
+        $('divMain').setStyle({height:mainHeight + 'px'});
     },
     
     initFavButtons: function()
