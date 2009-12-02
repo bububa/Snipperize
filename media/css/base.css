@@ -239,7 +239,13 @@ dt {
 .layout .main .content .site-sub, .printfooter {
 	display: none;
 }
- 
+
+.layout .topbanner {
+    position:absolute;
+    top:-1.4em;
+    left:15em;
+}
+
 .layout table.matrix {
 	margin-bottom: 1em;
 }
